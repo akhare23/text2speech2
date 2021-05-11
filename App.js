@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Text, View, StyleSheet, TextInput,TouchableOpacity } from 'react-native';
+import { Text, View, StyleSheet, TextInput,TouchableOpacity, Alert } from 'react-native';
 import * as Speech from "expo-speech"
 
 // You can import from local files
@@ -21,11 +21,14 @@ export default class App extends React.Component {
       <TextInput style = {styles.inputBox} onChangeText= {(text)=>{
         this.setState({text:text})
       }}></TextInput>
-      <TouchableOpacity style = {styles.button} onPress = {()=>{
-        this.speechfunction();
-      }}>
-        <Text>Submit</Text>
-      </TouchableOpacity>
+      <View>
+        {this.state.text === "" ? Alert.alert("Text input is empty")
+        :<TouchableOpacity style = {styles.button} onPress = {()=>{
+          this.speechfunction();
+        }}>
+          <Text>Submit</Text>
+        </TouchableOpacity> } 
+      </View>
     </View>
   );
 }
